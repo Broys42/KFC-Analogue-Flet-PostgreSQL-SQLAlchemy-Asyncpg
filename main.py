@@ -5,8 +5,8 @@ class Header():
         self.selected_index=0
 
     def main(self, page: ft.Page):
+        self.edit_flag = False
         def change_selected_index(e, key):
-            print(page.width)
             for index, tab in enumerate(self.tabs):
                 if index == key:
                     tab.style.color[ft.MaterialState.DEFAULT] = "#e31f2d"
@@ -37,16 +37,34 @@ class Header():
             on_click=lambda e: change_selected_index(e=e, key=1)
         )
 
-        self.turnON_edit_btn = ft.TextButton("Включить редактирование")
+        self.turnON_edit_btn = ft.FilledButton(
+            text="Включить редактирование",
+            style=ft.ButtonStyle(
+                shape=ft.StadiumBorder(),
+                bgcolor="#e31f2d"
+            ),
+            on_click=lambda e: click_turnON_edit_btn(e=e)
+        )
+
+        def click_turnON_edit_btn(e: ft.ControlEvent):
+            if self.edit_flag:
+                self.edit_flag = False
+                e.control.text = "Включить редактирование"
+                print(self.edit_flag)
+                page.update()
+            else:
+                self.edit_flag = True
+                e.control.text = "Отключить редактирование"
+                print(self.edit_flag)
+                page.update()
 
         self.tabs=[self.menu_tab, self.users_tab]
-        self.container = ft.Container(
-            bgcolor = None
-        )
 
         self.header_tabs = ft.Row(
             height=30,
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20,
+            width=150,
             controls=[
                 self.kfc_logo,
                 self.menu_tab,
@@ -57,12 +75,11 @@ class Header():
         self.header = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             controls=[
-                ft.Row(),
+                ft.Text(),
                 self.header_tabs,
                 self.turnON_edit_btn
             ]
         )
-
         page.add(self.header)
 
 ft.app(
