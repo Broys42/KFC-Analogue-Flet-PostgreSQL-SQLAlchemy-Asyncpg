@@ -1,69 +1,66 @@
+from abc import abstractmethod
 import flet as ft
+from FoodCardEditAlert import FoodCardEditAlert
 
 
-class FoodCard():
-    def __init__(self):
-        pass
+class FoodCard(ft.Column):
+    def __init__(self, page, name, price, image):
+        super().__init__()
+        self.page = page
+        self.name = name
+        self.price = price
+        self.image = image
 
-    def main(self, page: ft.Page):
-        page.fonts = {
-            "SF Pro Display Black": "/fonts/SF-Pro-Display-Black.otf",
-            "SF Pro Display Bold": "/fonts/SF-Pro-Display-Bold.otf",
-            "SF Pro Display Heavy": "/fonts/SF-Pro-Display-Heavy.otf",
-            "SF Pro Display Light": "/fonts/SF-Pro-Display-Light.otf",
-            "SF Pro Display Medium": "/fonts/SF-Pro-Display-Medium.otf",
-            "SF Pro Display Regular": "/fonts/SF-Pro-Display-Regular.otf",
-            "SF Pro Display Semibold": "/fonts/SF-Pro-Display-Semibold.otf",
-            "SF Pro Display Ultralight": "/fonts/SF-Pro-Display-Ultralight.otf",
-        }
+        self.width = 250
+        self.spacing = 30
 
-        foodCard = self.container = ft.Container(
-            ft.Column(
-                spacing=30,
-                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                width=250,
-                height=500,
-                controls=[
-                    ft.Image(
-                        src=f"/images/food/chicken_cake.png"
-                    ),
-                    ft.Column(
-                        spacing=30,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        controls=[
-                            ft.Text(
-                                text_align=ft.TextAlign.CENTER,
-                                value="Маэстро чизбургер делюкс hot",
-                                size=20,
-                                font_family="SF Pro Display Medium",
-                            ),
-                            ft.Row(
-                                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                                controls=[
-                                    ft.Text(
-                                        value="1000" + "₽",
-                                        size=20,
-                                        font_family="SF Pro Display Bold",
-                                    ),
-                                    ft.FilledButton(
-                                        text="Редактировать",
-                                        style=ft.ButtonStyle(
-                                            shape=ft.RoundedRectangleBorder(
-                                                radius=10),
-                                            bgcolor="#e31f2d"
-                                        )
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                ])
+        self.foodNameText = ft.Text(
+            text_align=ft.TextAlign.CENTER,
+            value=self.name,
+            size=20,
+            font_family="SF Pro Display Medium",
         )
-        page.add(foodCard)
 
+        self.priceText = ft.Text(
+            value=self.price + "₽",
+            size=20,
+            font_family="SF Pro Display Bold",
+        )
 
-ft.app(
-    target=FoodCard().main,
-    assets_dir="assets"
-)
+        self.edit_button = ft.FilledButton(
+            text="Редактировать",
+            style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(
+                    radius=10),
+                bgcolor="#e31f2d"
+            ),
+            on_click=lambda e: self.click_on_edit(
+                e=e)
+        )
+
+        self.priceAndButton = ft.Row(
+            width=250,
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            controls=[
+                self.priceText,
+                self.edit_button
+            ]
+        )
+
+        self.foodImage = ft.Image(
+            fit=ft.ImageFit.FIT_WIDTH,
+            src=f"/images/food/chicken_cake.png"
+        )
+
+        self.controls=[
+                self.foodImage,
+                self.foodNameText,
+                self.priceAndButton
+            ]
+
+    def click_on_edit(self, e):
+        self.alert = FoodCardEditAlert(
+            self.name, self.price, self.image, page=self.page)
+        self.page.dialog = self.alert
+        self.alert.open = True
+        self.page.update()

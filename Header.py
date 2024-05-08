@@ -1,19 +1,13 @@
 import flet as ft
+from FoodCard import FoodCard
+from FoodCardEditAlert import FoodCardEditAlert
 
 
-class Header():
-    def __init__(self):
+class Header(ft.Row):
+    def __init__(self, page: ft.Page):
+        super().__init__()
         self.selected_index = 0
-
-    def main(self, page: ft.Page):
-
-        def change_selected_index(e, key):
-            for index, tab in enumerate(self.tabs):
-                if index == key:
-                    tab.style.color[ft.MaterialState.DEFAULT] = "#e31f2d"
-                else:
-                    tab.style.color[ft.MaterialState.DEFAULT] = "black"
-            page.update()
+        self.page = page
 
         self.kfc_logo = ft.Image(src=f"/images/kfc_logo.png")
 
@@ -24,7 +18,8 @@ class Header():
                     ft.MaterialState.HOVERED: "#e31f2d",
                     ft.MaterialState.DEFAULT: "#e31f2d"
                 }),
-            on_click=lambda e: change_selected_index(e=e, key=0)
+            on_click=lambda e: self.change_selected_index(
+                e=e, key=0)
         )
 
         self.users_tab = ft.TextButton(
@@ -34,20 +29,27 @@ class Header():
                     ft.MaterialState.HOVERED: "#e31f2d",
                     ft.MaterialState.DEFAULT: "black"
                 }),
-            on_click=lambda e: change_selected_index(e=e, key=1)
+            on_click=lambda e: self.change_selected_index(
+                e=e, key=1)
         )
 
         self.tabs = [self.menu_tab, self.users_tab]
 
-        self.header= ft.Row(
-            height=30,
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=20,
-            controls=[
-                self.kfc_logo,
-                self.menu_tab,
-                self.users_tab
-            ]
-        )
+        self.height = 30
+        self.alignment = ft.MainAxisAlignment.CENTER
+        self.spacing = 20
+        self.controls = [
+            self.kfc_logo,
+            self.menu_tab,
+            self.users_tab
+        ]
 
-        page.add(self.header)
+    def change_selected_index(self, e, key):
+        self.selected_index = key
+        print(self.selected_index)
+        for index, tab in enumerate(self.tabs):
+            if index == key:
+                tab.style.color[ft.MaterialState.DEFAULT] = "#e31f2d"
+            else:
+                tab.style.color[ft.MaterialState.DEFAULT] = "black"
+        self.page.update()
