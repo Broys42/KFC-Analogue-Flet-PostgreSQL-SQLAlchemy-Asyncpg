@@ -1,11 +1,13 @@
 import flet as ft
 
+
 class Header():
     def __init__(self):
-        self.selected_index=0
+        self.selected_index = 0
 
     def main(self, page: ft.Page):
         self.edit_flag = False
+
         def change_selected_index(e, key):
             for index, tab in enumerate(self.tabs):
                 if index == key:
@@ -14,26 +16,25 @@ class Header():
                     tab.style.color[ft.MaterialState.DEFAULT] = "black"
             page.update()
 
-
         self.kfc_logo = ft.Image(src=f"/images/kfc_logo.png")
 
         self.menu_tab = ft.TextButton(
             text="Меню",
             style=ft.ButtonStyle(
-            color={
-                ft.MaterialState.HOVERED: "#e31f2d",
-                ft.MaterialState.DEFAULT: "#e31f2d"
-            }),
+                color={
+                    ft.MaterialState.HOVERED: "#e31f2d",
+                    ft.MaterialState.DEFAULT: "#e31f2d"
+                }),
             on_click=lambda e: change_selected_index(e=e, key=0)
         )
 
         self.users_tab = ft.TextButton(
             text="Пользователи",
             style=ft.ButtonStyle(
-            color={
-                ft.MaterialState.HOVERED: "#e31f2d",
-                ft.MaterialState.DEFAULT: "black"
-            }),
+                color={
+                    ft.MaterialState.HOVERED: "#e31f2d",
+                    ft.MaterialState.DEFAULT: "black"
+                }),
             on_click=lambda e: change_selected_index(e=e, key=1)
         )
 
@@ -50,15 +51,13 @@ class Header():
             if self.edit_flag:
                 self.edit_flag = False
                 e.control.text = "Включить редактирование"
-                print(self.edit_flag)
                 page.update()
             else:
                 self.edit_flag = True
                 e.control.text = "Отключить редактирование"
-                print(self.edit_flag)
                 page.update()
 
-        self.tabs=[self.menu_tab, self.users_tab]
+        self.tabs = [self.menu_tab, self.users_tab]
 
         self.header_tabs = ft.Row(
             height=30,
@@ -69,8 +68,8 @@ class Header():
                 self.kfc_logo,
                 self.menu_tab,
                 self.users_tab
-                ]
-            )
+            ]
+        )
 
         self.header = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
