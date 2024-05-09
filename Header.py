@@ -46,7 +46,6 @@ class Header(ft.Row):
 
     def change_selected_index(self, e, key):
         self.selected_index = key
-        print(self.selected_index)
         for index, tab in enumerate(self.tabs):
             if index == key:
                 tab.style.color[ft.MaterialState.DEFAULT] = "#e31f2d"
