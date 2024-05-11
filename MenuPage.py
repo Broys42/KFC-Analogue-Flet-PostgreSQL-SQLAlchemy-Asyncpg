@@ -1,5 +1,6 @@
 import flet as ft
 from FoodCard import FoodCard
+from ViewModel import ViewModel
 
 
 class MenuPage(ft.Column):
@@ -17,7 +18,7 @@ class MenuPage(ft.Column):
             size=30
         )
 
-        self.titleRow = ft.Row(
+        self.title_Row = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             controls=[
                 self.title,
@@ -25,32 +26,24 @@ class MenuPage(ft.Column):
             ]
         )
 
-        self.cardsOfFood = ft.Row(
+        self.cards_Of_Food = ft.Row(
             wrap=True,
             spacing=100,
             run_spacing=50,
-            controls=self.cardsOfFoodControls()
+            controls=[]
         )
 
-        self.food = ft.ListView(
+        self.food_list = ft.ListView(
             expand=1,
             controls=[
-                self.cardsOfFood
+                self.cards_Of_Food
             ]
         )
 
         self.controls = [
-            self.titleRow,
-            self.food
+            self.title_Row,
+            self.food_list
         ]
-
-    def cardsOfFoodControls(self):
-        items = []
-        for i in range(30):
-            items.append(
-                FoodCard(page=self.page, name="Привет", price="3000", image="")
-            )
-        return items
 
     def on_page_resize(self, e):
         self.height = self.page.height

@@ -58,6 +58,7 @@ class FoodCard(ft.Column):
                 self.priceAndButton
             ]
 
+    #Abstract
     def click_on_edit(self, e):
         self.alert = FoodCardEditAlert(
             self.name, self.price, self.image, page=self.page)

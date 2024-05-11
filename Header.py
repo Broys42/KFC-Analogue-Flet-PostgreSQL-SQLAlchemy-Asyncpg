@@ -1,6 +1,5 @@
 import flet as ft
-from FoodCard import FoodCard
-from FoodCardEditAlert import FoodCardEditAlert
+from ViewModel import ViewModel
 
 
 class Header(ft.Row):
@@ -18,7 +17,7 @@ class Header(ft.Row):
                     ft.MaterialState.HOVERED: "#e31f2d",
                     ft.MaterialState.DEFAULT: "#e31f2d"
                 }),
-            on_click=lambda e: self.change_selected_index(
+            on_click=lambda e: self.change_selected_tab(
                 e=e, key=0)
         )
 
@@ -29,7 +28,7 @@ class Header(ft.Row):
                     ft.MaterialState.HOVERED: "#e31f2d",
                     ft.MaterialState.DEFAULT: "black"
                 }),
-            on_click=lambda e: self.change_selected_index(
+            on_click=lambda e: self.change_selected_tab(
                 e=e, key=1)
         )
 
@@ -44,11 +43,6 @@ class Header(ft.Row):
             self.users_tab
         ]
 
-    def change_selected_index(self, e, key):
-        self.selected_index = key
-        for index, tab in enumerate(self.tabs):
-            if index == key:
-                tab.style.color[ft.MaterialState.DEFAULT] = "#e31f2d"
-            else:
-                tab.style.color[ft.MaterialState.DEFAULT] = "black"
-        self.page.update()
+    #Abstract
+    def change_selected_tab(self, e, key):
+        pass
