@@ -43,6 +43,6 @@ class Header(ft.Row):
             self.users_tab
         ]
 
-    #Abstract
+    # Abstract
     def change_selected_tab(self, e, key):
         pass

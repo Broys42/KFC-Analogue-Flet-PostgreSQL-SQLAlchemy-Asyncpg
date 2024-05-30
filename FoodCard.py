@@ -1,27 +1,27 @@
-from abc import abstractmethod
 import flet as ft
 from FoodCardEditAlert import FoodCardEditAlert
 
 
 class FoodCard(ft.Column):
-    def __init__(self, page, name, price, image):
+    def __init__(self, name, price, image):
         super().__init__()
-        self.page = page
         self.name = name
         self.price = price
         self.image = image
 
         self.width = 250
+        self.height = 450
         self.spacing = 30
+        self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-        self.foodNameText = ft.Text(
+        self.food_Name = ft.Text(
             text_align=ft.TextAlign.CENTER,
             value=self.name,
             size=20,
             font_family="SF Pro Display Medium",
         )
 
-        self.priceText = ft.Text(
+        self.price_Text = ft.Text(
             value=self.price + "₽",
             size=20,
             font_family="SF Pro Display Bold",
@@ -35,33 +35,29 @@ class FoodCard(ft.Column):
                 bgcolor="#e31f2d"
             ),
             on_click=lambda e: self.click_on_edit(
-                e=e)
+                e=e, name=self.name, price=self.price, image=self.image)
         )
 
-        self.priceAndButton = ft.Row(
+        self.price_and_button = ft.Row(
             width=250,
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             controls=[
-                self.priceText,
+                self.price_Text,
                 self.edit_button
             ]
         )
 
-        self.foodImage = ft.Image(
+        self.food_Image = ft.Image(
             fit=ft.ImageFit.FIT_WIDTH,
             src=f"/images/food/chicken_cake.png"
         )
 
-        self.controls=[
-                self.foodImage,
-                self.foodNameText,
-                self.priceAndButton
-            ]
+        self.controls = [
+            self.food_Image,
+            self.food_Name,
+            self.price_and_button
+        ]
 
-    #Abstract
-    def click_on_edit(self, e):
-        self.alert = FoodCardEditAlert(
-            self.name, self.price, self.image, page=self.page)
-        self.page.dialog = self.alert
-        self.alert.open = True
-        self.page.update()
+    # Abstract
+    def click_on_edit(self, e, name, price, image):
+        pass
