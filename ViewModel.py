@@ -11,3 +11,6 @@ class ViewModel():
 
     def change_selected_tab(self, index):
         self.model.user.selected_tab = index
+
+    def get_menuModel(self):
+        return self.model.menuModel.model

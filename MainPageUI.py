@@ -1,10 +1,10 @@
 import flet as ft
-from Header import Header
-from MenuPage import MenuPage
+from HeaderUI import HeaderUI
+from MenuPageUI import MenuPage
 from ViewModel import ViewModel
 
 
-class MainPage(ft.Column):
+class MainPageUI(ft.Column):
     def __init__(self, page: ft.Page, controls: ft.Column.controls):
         super().__init__()
         self.page = page

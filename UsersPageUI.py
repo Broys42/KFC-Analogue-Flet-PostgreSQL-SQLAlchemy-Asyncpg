@@ -1,19 +1,22 @@
 import flet as ft
-from FoodCard import FoodCard
+from MenuItemUI import MenuItemUI
 from ViewModel import ViewModel
 
 
-class MenuPage(ft.Column):
+class UsersPageUI(ft.Column):
     def __init__(self, page: ft.Page):
         super().__init__()
         self.page = page
         self.height = page.height
         self.width = 1440
 
+        self.alignment = ft.MainAxisAlignment.CENTER
+        self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
         self.page.on_resize = self.on_page_resize
 
         self.title = ft.Text(
-            value="Меню",
+            value="Пользователи",
             font_family="SF-Pro-Display-Black",
             size=30
         )
@@ -26,27 +29,25 @@ class MenuPage(ft.Column):
             ]
         )
 
-        self.cards_Of_Food = ft.Row(
+        self.cards_of_User = ft.Row(
             wrap=True,
             spacing=146,
-            run_spacing=50,
+            run_spacing=100,
             controls=[]
         )
 
-        self.food_list = ft.ListView(
-            width=1440,
+        self.user_list = ft.ListView(
             expand=1,
             controls=[
-                self.cards_Of_Food
+                self.cards_of_User
             ]
         )
 
         self.controls = [
             self.title_Row,
-            self.food_list
+            self.user_list
         ]
 
     def on_page_resize(self, e):
-        print(self.page)
         self.height = self.page.height
         self.page.update()

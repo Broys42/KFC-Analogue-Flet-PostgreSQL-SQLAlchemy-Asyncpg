@@ -2,7 +2,7 @@ import flet as ft
 from ViewModel import ViewModel
 
 
-class Header(ft.Row):
+class HeaderUI(ft.Row):
     def __init__(self, page: ft.Page):
         super().__init__()
         self.selected_index = 0

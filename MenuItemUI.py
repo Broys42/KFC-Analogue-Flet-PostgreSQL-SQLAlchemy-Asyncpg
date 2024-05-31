@@ -1,8 +1,8 @@
 import flet as ft
-from FoodCardEditAlert import FoodCardEditAlert
+from MenuItemAlertUI import MenuItemAlertUI
 
 
-class FoodCard(ft.Column):
+class MenuItemUI(ft.Column):
     def __init__(self, name, price, image):
         super().__init__()
         self.name = name
@@ -18,6 +18,7 @@ class FoodCard(ft.Column):
             text_align=ft.TextAlign.CENTER,
             value=self.name,
             size=20,
+            height=30,
             font_family="SF Pro Display Medium",
         )
 
@@ -48,8 +49,10 @@ class FoodCard(ft.Column):
         )
 
         self.food_Image = ft.Image(
-            fit=ft.ImageFit.FIT_WIDTH,
-            src=f"/images/food/chicken_cake.png"
+            height=200,
+            width=250,
+            fit=ft.ImageFit.CONTAIN,
+            src=f"/images/food/{image}.png"
         )
 
         self.controls = [

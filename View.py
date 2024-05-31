@@ -1,13 +1,14 @@
 import flet as ft
 from Window import Window
 from ViewModel import ViewModel
-from MainPage import MainPage
-from Header import Header
-from MenuPage import MenuPage
-from UsersPage import UsersPage
-from UserCard import UserCard
-from FoodCard import FoodCard
-from FoodCardEditAlert import FoodCardEditAlert
+from MainPageUI import MainPageUI
+from HeaderUI import HeaderUI
+from MenuPageUI import MenuPage
+from UsersPageUI import UsersPageUI
+from UserCardUI import UserCardUI
+from MenuItemUI import MenuItemUI
+from MenuItem import MenuItem
+from MenuItemAlertUI import MenuItemAlertUI
 
 
 class View():
@@ -33,7 +34,6 @@ class View():
         self.page = page
 
         self.set_foodCardAlert()
-        self.set_foodCard()
         self.set_userCard()
         self.set_header()
         self.set_userPage()
@@ -45,55 +45,57 @@ class View():
 
         page.add(self.main_Window)
 
-    def set_foodCard(self):
-        self.foodCard = FoodCard(
-            name="Privet",
-            price="1000",
-            image="asdsa")
-        self.foodCard.click_on_edit = self.click_on_edit_in_foodCard
+    def get_menuItemUI(self, menuItem: MenuItem):
+        menuItemUI = MenuItemUI(
+            name=menuItem.name,
+            price=menuItem.price,
+            image=menuItem.image)
+        menuItemUI.click_on_edit = self.click_on_edit_in_foodCard
+        # menuItemUI.change_image(image=menuItem.image)
+        return menuItemUI
 
     def set_userCard(self):
-        self.userCard = UserCard(
+        self.userCard = UserCardUI(
             name="User",
             image="asdsa")
 
     def set_foodCardAlert(self):
-        self.food_card_alert = FoodCardEditAlert(page=self.page)
+        self.food_card_alert = MenuItemAlertUI(page=self.page)
         self.page.dialog = self.food_card_alert
         self.page.update()
 
     def set_header(self):
-        self.header = Header(page=self.page)
+        self.header = HeaderUI(page=self.page)
         self.header.change_selected_tab = self.clicked_on_tab_in_header
 
     def set_menuPage(self):
         self.menu_Page = MenuPage(page=self.page)
-        self.set_food_cards_for_menuPage()
+        self.set_menu_cards_for_menuPage()
 
     def set_userPage(self):
-        self.user_Page = UsersPage(page=self.page)
+        self.user_Page = UsersPageUI(page=self.page)
         self.set_users_cards_for_userPage()
 
     def set_mainPage(self):
-        self.main_Page = MainPage(page=self.page, controls=self.get_mainPage_controls(
+        self.main_Page = MainPageUI(page=self.page, controls=self.get_mainPage_controls(
             self.viewModel.get_selected_tab()))
 
     def set_mainWindow(self):
         self.main_Window = Window(page=self.page, content=self.main_Page)
 
-    def set_food_cards_for_menuPage(self):
-        self.menu_Page.cards_Of_Food.controls = self.get_food_cards_for_menuPage()
+    def set_menu_cards_for_menuPage(self):
+        self.menu_Page.cards_Of_Food.controls = self.get_menu_cards_for_menuPage()
         self.page.update()
 
     def set_users_cards_for_userPage(self):
         self.user_Page.cards_of_User.controls = self.get_user_cards_for_userPage()
         self.page.update()
 
-    def get_food_cards_for_menuPage(self):
+    def get_menu_cards_for_menuPage(self):
         items = []
-        for i in range(30):
+        for menuItem in self.viewModel.get_menuModel():
             items.append(
-                self.foodCard
+                self.get_menuItemUI(menuItem)
             )
         return items
 
@@ -134,7 +136,7 @@ class View():
         self.food_card_alert.open = True
         self.page.update()
 
-    def close_dlg(self, e: ft.ControlEvent):
+    def close_dlg(self, e):
         self.food_card_alert.close_dlg()
         self.food_card_alert.update()
         self.page.update()

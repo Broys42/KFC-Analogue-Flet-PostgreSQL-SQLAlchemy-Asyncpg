@@ -1,4 +1,4 @@
-class FoodPosition():
+class MenuItem():
     def __init__(self, name, price, image):
         self.name = name
         self.price = price

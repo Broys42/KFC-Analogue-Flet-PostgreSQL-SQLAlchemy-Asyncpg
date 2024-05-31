@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class FoodCardEditAlert(ft.AlertDialog):
+class MenuItemAlertUI(ft.AlertDialog):
     def __init__(self, page):
         super().__init__()
         self.open = False
@@ -30,6 +30,10 @@ class FoodCardEditAlert(ft.AlertDialog):
 
     def change_title(self, name):
         self.title = ft.Text(name)
+
+    def set_page_alert(self):
+        self.page.dialog = self
+        self.page.update()
 
     #Abstract
     def close_dlg(self, e):

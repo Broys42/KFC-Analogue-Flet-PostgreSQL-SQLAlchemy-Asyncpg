@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class UserCard(ft.Row):
+class UserCardUI(ft.Row):
     def __init__(self, name, image):
         super().__init__()
         self.name = name
