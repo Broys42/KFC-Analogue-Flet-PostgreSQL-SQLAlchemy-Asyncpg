@@ -1,3 +1,4 @@
+import asyncio
 import flet as ft
 from Window import Window
 from ViewModel import ViewModel
@@ -11,15 +12,18 @@ from MenuItem import MenuItem
 from MenuItemAlertUI import MenuItemAlertUI
 
 
+
 class View():
     def __init__(self, viewModel: ViewModel):
         self.viewModel = viewModel
-        ft.app(
+
+    async def show(self):
+        await ft.app_async(
             target=self.main,
             assets_dir="assets"
         )
 
-    def main(self, page: ft.Page):
+    async def main(self, page: ft.Page):
         page.fonts = {
             "SF-Pro-Display-Black": "/fonts/SF-Pro-Display-Black.otf",
             "SF-Pro-Display-Bold": "/fonts/SF-Pro-Display-Bold.otf",
@@ -38,6 +42,7 @@ class View():
         self.set_header()
         self.set_userPage()
         self.set_menuPage()
+        await self.set_menu_cards_for_menuPage()
         self.set_mainPage()
         self.set_mainWindow()
 
@@ -70,7 +75,6 @@ class View():
 
     def set_menuPage(self):
         self.menu_Page = MenuPage(page=self.page)
-        self.set_menu_cards_for_menuPage()
 
     def set_userPage(self):
         self.user_Page = UsersPageUI(page=self.page)
@@ -83,17 +87,18 @@ class View():
     def set_mainWindow(self):
         self.main_Window = Window(page=self.page, content=self.main_Page)
 
-    def set_menu_cards_for_menuPage(self):
-        self.menu_Page.cards_Of_Food.controls = self.get_menu_cards_for_menuPage()
+    async def set_menu_cards_for_menuPage(self):
+        self.menu_Page.cards_Of_Food.controls = await self.get_menu_cards_for_menuPage()
         self.page.update()
 
     def set_users_cards_for_userPage(self):
         self.user_Page.cards_of_User.controls = self.get_user_cards_for_userPage()
         self.page.update()
 
-    def get_menu_cards_for_menuPage(self):
+    async def get_menu_cards_for_menuPage(self):
         items = []
-        for menuItem in self.viewModel.get_menuModel():
+        await self.viewModel.get_menuitems_model_from_database()
+        for menuItem in self.viewModel.get_menuItemsModel():
             items.append(
                 self.get_menuItemUI(menuItem)
             )

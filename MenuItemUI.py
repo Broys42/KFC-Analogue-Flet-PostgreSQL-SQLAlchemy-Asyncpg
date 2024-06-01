@@ -23,7 +23,7 @@ class MenuItemUI(ft.Column):
         )
 
         self.price_Text = ft.Text(
-            value=self.price + "₽",
+            value=str(self.price) + "₽",
             size=20,
             font_family="SF Pro Display Bold",
         )
