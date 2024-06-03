@@ -1,8 +1,10 @@
-from User import User
-from MenuItemModel import MenuItemModel
+from entities.AppUser import AppUser
+from models.MenuItemModel import MenuItemModel
+from models.ServiceUsersModel import ServiceUsersModel
 from orm import AsyncORM
 
 class Model():
     def __init__(self):
-        self.user = User()
+        self.app_user = AppUser()
+        self.services_users = ServiceUsersModel()
         self.menu_items_model = MenuItemModel()

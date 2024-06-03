@@ -7,7 +7,7 @@ from orm import SyncORM, AsyncORM
 from core import SyncCore
 
 import flet as ft
-from Window import Window
+from UI.WindowUI import WindowUI
 from Model import Model
 from ViewModel import ViewModel
 from View import View

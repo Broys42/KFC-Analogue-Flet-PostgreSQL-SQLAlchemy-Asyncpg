@@ -1,4 +1,4 @@
-from MenuItem import MenuItem
+from entities.MenuItem import MenuItem
 
 class MenuItemModel():
     def __init__(self):

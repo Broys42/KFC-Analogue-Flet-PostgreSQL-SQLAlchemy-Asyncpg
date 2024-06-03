@@ -1,7 +1,7 @@
 from sqlalchemy import select, text, insert, func, cast
 import asyncio
 from database import sync_engine, async_engine, session_factory, async_session_factory, Base
-from models import MenuItemsOrm, menuItem_table
+from db_models import MenuItemsOrm, menuItem_table
 
 class SyncORM():
     def __init__(self):

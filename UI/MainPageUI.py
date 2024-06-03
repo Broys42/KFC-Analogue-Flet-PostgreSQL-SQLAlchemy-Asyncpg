@@ -1,6 +1,6 @@
 import flet as ft
-from HeaderUI import HeaderUI
-from MenuPageUI import MenuPage
+from UI.HeaderUI import HeaderUI
+from UI.MenuPageUI import MenuPage
 from ViewModel import ViewModel
 
 

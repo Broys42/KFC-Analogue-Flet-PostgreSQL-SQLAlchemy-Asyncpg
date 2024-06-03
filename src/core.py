@@ -1,7 +1,7 @@
 from sqlalchemy import select, text, insert, update
 import asyncio
 from database import sync_engine, async_engine
-from models import menuItem_table, metadata_obj
+from db_models import menuItem_table, metadata_obj
 
 
 class SyncCore:

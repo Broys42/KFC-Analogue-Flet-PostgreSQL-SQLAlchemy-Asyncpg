@@ -1,5 +1,5 @@
 import flet as ft
-from MenuItemUI import MenuItemUI
+from UI.MenuItemUI import MenuItemUI
 from ViewModel import ViewModel
 
 

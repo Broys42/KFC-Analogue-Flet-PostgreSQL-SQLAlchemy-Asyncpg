@@ -1,16 +1,15 @@
 import asyncio
 import flet as ft
-from Window import Window
+from UI.WindowUI import WindowUI
 from ViewModel import ViewModel
-from MainPageUI import MainPageUI
-from HeaderUI import HeaderUI
-from MenuPageUI import MenuPage
-from UsersPageUI import UsersPageUI
-from UserCardUI import UserCardUI
-from MenuItemUI import MenuItemUI
-from MenuItem import MenuItem
-from MenuItemAlertUI import MenuItemAlertUI
-
+from UI.MainPageUI import MainPageUI
+from UI.HeaderUI import HeaderUI
+from UI.MenuPageUI import MenuPage
+from UI.UsersPageUI import UsersPageUI
+from UI.UserCardUI import UserCardUI
+from UI.MenuItemUI import MenuItemUI
+from entities.MenuItem import MenuItem
+from UI.MenuItemAlertUI import MenuItemAlertUI
 
 
 class View():
@@ -88,7 +87,7 @@ class View():
             self.viewModel.get_selected_tab()))
 
     def set_mainWindow(self):
-        self.main_Window = Window(page=self.page, content=self.main_Page)
+        self.main_Window = WindowUI(page=self.page, content=self.main_Page)
 
     async def set_menu_cards_for_menuPage(self):
         self.menu_Page.cards_Of_Food.controls = await self.get_menu_cards_for_menuPage()

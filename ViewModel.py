@@ -1,7 +1,7 @@
 from Model import Model
 import flet as ft
 from orm import AsyncORM
-from MenuItem import MenuItem
+from entities.MenuItem import MenuItem
 
 class ViewModel():
     def __init__(self, model: Model):
@@ -9,10 +9,10 @@ class ViewModel():
         self.async_orm = AsyncORM()
 
     def get_selected_tab(self):
-        return self.model.user.selected_tab
+        return self.model.app_user.selected_tab
 
     def change_selected_tab(self, index):
-        self.model.user.selected_tab = index
+        self.model.app_user.selected_tab = index
 
     def get_menuItemsModel(self):
         return self.model.menu_items_model.model
@@ -30,6 +30,5 @@ class ViewModel():
 
     def update_menuItem_in_model(self, item_id, name, price, image):
         menu_item = self.model.menu_items_model.model[item_id]
-        print(menu_item)
         updates = {'name': name, 'price': price, 'image': image, 'item_id': item_id}
         menu_item.__dict__.update(updates)

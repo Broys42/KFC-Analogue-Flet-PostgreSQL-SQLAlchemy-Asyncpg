@@ -1,6 +1,6 @@
 from typing import Annotated
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base, str_256
 
 intpk = Annotated[int, mapped_column(primary_key=True)]
@@ -18,7 +18,7 @@ class UsersOrm(Base):
     name: Mapped[str_256]
 
 class UsersFavouriteMenuItems(Base):
-    __tablename__ = "usersfavmenuitems"
+    __tablename__ = "usersfavmenuitems",
     user_id = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
     menuitem_id = mapped_column(ForeignKey("menuitems.id", ondelete="CASCADE"), primary_key=True)
 
