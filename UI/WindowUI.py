@@ -1,6 +1,6 @@
 import flet as ft
 from UI.MainPageUI import MainPageUI
-from ViewModel import ViewModel
+from mvvm.ViewModel import ViewModel
 
 class WindowUI(ft.Container):
     def __init__(self, page: ft.Page, content: MainPageUI):

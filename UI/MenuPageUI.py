@@ -1,6 +1,6 @@
 import flet as ft
 from UI.MenuItemUI import MenuItemUI
-from ViewModel import ViewModel
+from mvvm.ViewModel import ViewModel
 
 
 class MenuPage(ft.Column):

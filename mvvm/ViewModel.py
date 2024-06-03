@@ -1,4 +1,4 @@
-from Model import Model
+from mvvm.Model import Model
 import flet as ft
 from orm import AsyncORM
 from entities.MenuItem import MenuItem

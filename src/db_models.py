@@ -17,10 +17,10 @@ class UsersOrm(Base):
     id: Mapped[intpk]
     name: Mapped[str_256]
 
-class UsersFavouriteMenuItems(Base):
-    __tablename__ = "usersfavmenuitems",
-    user_id = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
-    menuitem_id = mapped_column(ForeignKey("menuitems.id", ondelete="CASCADE"), primary_key=True)
+# class UsersFavouriteMenuItems(Base):
+#     __tablename__ = "usersfavmenuitems",
+#     user_id = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+#     menuitem_id = mapped_column(ForeignKey("menuitems.id", ondelete="CASCADE"), primary_key=True)
 
 
 metadata_obj = MetaData()

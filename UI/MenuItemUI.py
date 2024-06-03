@@ -18,7 +18,7 @@ class MenuItemUI(ft.Column):
             text_align=ft.TextAlign.CENTER,
             value=self.name,
             size=20,
-            height=30,
+            height=70,
             font_family="SF Pro Display Medium",
         )
 

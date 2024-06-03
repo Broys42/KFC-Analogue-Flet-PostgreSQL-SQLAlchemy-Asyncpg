@@ -1,7 +1,6 @@
 from entities.AppUser import AppUser
 from models.MenuItemModel import MenuItemModel
 from models.ServiceUsersModel import ServiceUsersModel
-from orm import AsyncORM
 
 class Model():
     def __init__(self):

@@ -1,7 +1,10 @@
 import asyncio
+import sys
+import os
+
 import flet as ft
 from UI.WindowUI import WindowUI
-from ViewModel import ViewModel
+from mvvm.ViewModel import ViewModel
 from UI.MainPageUI import MainPageUI
 from UI.HeaderUI import HeaderUI
 from UI.MenuPageUI import MenuPage

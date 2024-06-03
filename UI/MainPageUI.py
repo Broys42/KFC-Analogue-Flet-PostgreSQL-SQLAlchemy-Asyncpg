@@ -1,7 +1,7 @@
 import flet as ft
 from UI.HeaderUI import HeaderUI
 from UI.MenuPageUI import MenuPage
-from ViewModel import ViewModel
+from mvvm.ViewModel import ViewModel
 
 
 class MainPageUI(ft.Column):

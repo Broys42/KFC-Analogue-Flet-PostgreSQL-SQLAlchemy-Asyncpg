@@ -1,17 +1,18 @@
+import flet as ft
 import asyncio
 import os
 import sys
+
 sys.path.insert(1, os.path.join(sys.path[0], 'src'))
 
-from orm import SyncORM, AsyncORM
-from core import SyncCore
+from src.config import settings
+from src.orm import SyncORM, AsyncORM
+from src.core import SyncCore
 
-import flet as ft
 from UI.WindowUI import WindowUI
-from Model import Model
-from ViewModel import ViewModel
-from View import View
-
+from mvvm.Model import Model
+from mvvm.ViewModel import ViewModel
+from mvvm.View import View
 
 class Starter():
     def __init__(self):
@@ -19,7 +20,10 @@ class Starter():
 
     async def main(self):
         self.async_orm = AsyncORM()
-        # await self.create_database()
+
+        if settings.CREATE_DB:
+            await self.create_database()
+
         self.model = Model()
         self.viewModel = ViewModel(self.model)
         self.view = View(self.viewModel)

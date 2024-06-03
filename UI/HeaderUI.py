@@ -1,5 +1,5 @@
 import flet as ft
-from ViewModel import ViewModel
+from mvvm.ViewModel import ViewModel
 
 
 class HeaderUI(ft.Row):

@@ -37,12 +37,12 @@ class SyncORM():
             results = session.execute(query).all()
             return results
 
-    @staticmethod
-    def update_menuItems(item_id: int = 1, new_name: str = "Burger 3"):
-        with session_factory() as session:
-            item = session.get(MenuItemsOrm, item_id)
-            item.name = new_name
-            session.commit()
+    # @staticmethod
+    # def update_menuItems(item_id: int = 1, new_name: str = "Burger 3"):
+    #     with session_factory() as session:
+    #         item = session.get(MenuItemsOrm, item_id)
+    #         item.name = new_name
+    #         session.commit()
 
 class AsyncORM():
     def __init__(self):
