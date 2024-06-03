@@ -5,4 +5,4 @@ from orm import AsyncORM
 class Model():
     def __init__(self):
         self.user = User()
-        self.menuItemsModel = MenuItemModel()
+        self.menu_items_model = MenuItemModel()

@@ -72,6 +72,7 @@ class AsyncORM():
 
     @staticmethod
     async def select_menuItems():
+        async_engine.echo = False
         async with async_session_factory() as session:
             query = (
                 select(MenuItemsOrm)
@@ -80,8 +81,11 @@ class AsyncORM():
             return results.all()
 
     @staticmethod
-    async def update_menuItems(item_id: int = 1, new_name: str = "Burger 3"):
+    async def update_menuItems(item_id, new_name, new_price, new_image):
+        async_engine.echo = True
         async with async_session_factory() as session:
             item = await session.get(MenuItemsOrm, item_id)
             item.name = new_name
+            item.price = new_price
+            item.image = new_image
             await session.commit()

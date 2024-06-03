@@ -1,20 +1,20 @@
 import flet as ft
-from MenuItemAlertUI import MenuItemAlertUI
 
 
 class MenuItemUI(ft.Column):
-    def __init__(self, name, price, image):
+    def __init__(self, name, price, image, item_id):
         super().__init__()
         self.name = name
         self.price = price
         self.image = image
+        self.item_id = item_id
 
         self.width = 250
         self.height = 450
         self.spacing = 30
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-        self.food_Name = ft.Text(
+        self.name_Text = ft.Text(
             text_align=ft.TextAlign.CENTER,
             value=self.name,
             size=20,
@@ -36,7 +36,7 @@ class MenuItemUI(ft.Column):
                 bgcolor="#e31f2d"
             ),
             on_click=lambda e: self.click_on_edit(
-                e=e, name=self.name, price=self.price, image=self.image)
+                e=e, menuItemUI=self)
         )
 
         self.price_and_button = ft.Row(
@@ -57,10 +57,10 @@ class MenuItemUI(ft.Column):
 
         self.controls = [
             self.food_Image,
-            self.food_Name,
+            self.name_Text,
             self.price_and_button
         ]
 
     # Abstract
-    def click_on_edit(self, e, name, price, image):
+    def click_on_edit(self, e, menuItemUI):
         pass

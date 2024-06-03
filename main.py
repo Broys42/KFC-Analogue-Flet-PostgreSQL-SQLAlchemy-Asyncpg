@@ -19,8 +19,7 @@ class Starter():
 
     async def main(self):
         self.async_orm = AsyncORM()
-        await self.create_database()
-
+        # await self.create_database()
         self.model = Model()
         self.viewModel = ViewModel(self.model)
         self.view = View(self.viewModel)

@@ -37,7 +37,7 @@ class View():
         }
         self.page = page
 
-        self.set_foodCardAlert()
+        self.set_menuItemAlert()
         self.set_userCard()
         self.set_header()
         self.set_userPage()
@@ -54,8 +54,9 @@ class View():
         menuItemUI = MenuItemUI(
             name=menuItem.name,
             price=menuItem.price,
-            image=menuItem.image)
-        menuItemUI.click_on_edit = self.click_on_edit_in_foodCard
+            image=menuItem.image,
+            item_id=menuItem.item_id)
+        menuItemUI.click_on_edit = self.click_on_edit_in_menu_item
         # menuItemUI.change_image(image=menuItem.image)
         return menuItemUI
 
@@ -64,9 +65,11 @@ class View():
             name="User",
             image="asdsa")
 
-    def set_foodCardAlert(self):
-        self.food_card_alert = MenuItemAlertUI(page=self.page)
-        self.page.dialog = self.food_card_alert
+    def set_menuItemAlert(self):
+        self.menu_item_alert = MenuItemAlertUI(self.page)
+        self.menu_item_alert.save_changes_btn.on_click = self.click_save_menuItem_changes
+        self.menu_item_alert.close_dlg_btn.on_click = self.click_close_dlg
+        self.page.dialog = self.menu_item_alert
         self.page.update()
 
     def set_header(self):
@@ -98,7 +101,7 @@ class View():
     async def get_menu_cards_for_menuPage(self):
         items = []
         await self.viewModel.get_menuitems_model_from_database()
-        for menuItem in self.viewModel.get_menuItemsModel():
+        for menuItem in self.viewModel.get_menuItemsModel().values():
             items.append(
                 self.get_menuItemUI(menuItem)
             )
@@ -136,17 +139,24 @@ class View():
                 tab.style.color[ft.MaterialState.DEFAULT] = "black"
         self.page.update()
 
-    def click_on_edit_in_foodCard(self, e, name, price, image):
-        self.food_card_alert.change_content(name=name, price=price, image=image)
-        self.food_card_alert.open = True
+    def click_on_edit_in_menu_item(self, e, menuItemUI):
+        self.menu_item_alert.change_menuItem(menuItemUI)
+        self.menu_item_alert.open = True
         self.page.update()
 
-    def close_dlg(self, e):
-        self.food_card_alert.close_dlg()
-        self.food_card_alert.update()
+    def click_close_dlg(self, e):
+        self.menu_item_alert.open = False
         self.page.update()
 
-    def open_dlg(self, e):
-        self.food_card_alert.open_dlg()
-        self.food_card_alert.update()
+    async def click_save_menuItem_changes(self, e):
+        item_id = self.menu_item_alert.menuItem.item_id
+
+        #Changes parameters
+        name = self.menu_item_alert.name_textfield.value
+        price = self.menu_item_alert.price_textfield.value
+        image = self.menu_item_alert.image_textfield.value
+
+        await self.viewModel.update_menuItem(item_id=item_id, name=name, price=int(price), image=image)
+        await self.set_menu_cards_for_menuPage()
+        self.menu_item_alert.open = False
         self.page.update()

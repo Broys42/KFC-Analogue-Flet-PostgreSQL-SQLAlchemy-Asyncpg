@@ -13,7 +13,7 @@ class SyncCore:
         sync_engine.echo = False
         metadata_obj.drop_all(sync_engine)
         metadata_obj.create_all(sync_engine)
-        sync_engine.echo = True
+        sync_engine.echo = False
 
     @staticmethod
     def insert_data():
