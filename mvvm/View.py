@@ -93,7 +93,7 @@ class View():
         self.main_Window = WindowUI(page=self.page, content=self.main_Page)
 
     async def set_menu_cards_for_menuPage(self):
-        self.menu_Page.cards_Of_Food.controls = await self.get_menu_cards_for_menuPage()
+        self.menu_Page.cards_Of_menu_items.controls = await self.get_menu_cards_for_menuPage()
         self.page.update()
 
     def set_users_cards_for_userPage(self):

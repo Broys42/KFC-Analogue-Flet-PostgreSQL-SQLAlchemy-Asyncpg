@@ -42,11 +42,11 @@ class UserCardUI(ft.Row):
         )
 
         self.user_avatar = ft.CircleAvatar(
-            height=300,
+            height=200,
             width=300,
             content=ft.Image(
-                fit=ft.ImageFit.FIT_WIDTH,
-                src=f"/images/food/chicken_cake.png"
+                fit=ft.ImageFit.CONTAIN,
+                src=f"/images/users/user_icon.png"
             )
         )
 

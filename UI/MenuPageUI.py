@@ -7,8 +7,8 @@ class MenuPage(ft.Column):
     def __init__(self, page: ft.Page):
         super().__init__()
         self.page = page
-        self.height = page.height
         self.width = 1440
+        self.height = self.page.height
 
         self.page.on_resize = self.on_page_resize
 
@@ -26,24 +26,37 @@ class MenuPage(ft.Column):
             ]
         )
 
-        self.cards_Of_Food = ft.Row(
+        self.cards_Of_menu_items = ft.Row(
             wrap=True,
             spacing=146,
             run_spacing=50,
             controls=[]
         )
 
-        self.food_list = ft.ListView(
+        self.download_app_banner_image = ft.Image(
             width=1440,
+            fit=ft.ImageFit.COVER,
+            src=f"/images/banners/banner 1.jpg"
+        )
+
+        # self.gift_banner_image = ft.Image(
+        #     width=1440,
+        #     fit=ft.ImageFit.COVER,
+        #     src=f"/images/banners/banner 2.jpg"
+        # )
+
+        self.menu_page_list = ft.ListView(
             expand=1,
             controls=[
-                self.cards_Of_Food
+                self.download_app_banner_image,
+                self.cards_Of_menu_items,
+                # self.gift_banner_image
             ]
         )
 
         self.controls = [
             self.title_Row,
-            self.food_list
+            self.menu_page_list,
         ]
 
     def on_page_resize(self, e):

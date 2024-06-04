@@ -10,8 +10,8 @@ class MenuItemUI(ft.Column):
         self.item_id = item_id
 
         self.width = 250
-        self.height = 450
-        self.spacing = 30
+        # self.height = 400
+        self.spacing = 15
         self.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
         self.name_Text = ft.Text(
@@ -41,6 +41,7 @@ class MenuItemUI(ft.Column):
 
         self.price_and_button = ft.Row(
             width=250,
+            vertical_alignment=ft.CrossAxisAlignment.END,
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             controls=[
                 self.price_Text,
