@@ -32,4 +32,4 @@ CREATE_DB: bool
 
 ## Скриншоты
 [![menu-page.jpg](https://i.postimg.cc/Kvgzj639/menu-page.jpg)](https://postimg.cc/yksBrrP9)
-[![edit-image.jpg](https://i.postimg.cc/VkqkBXRn/edit-image.jpg)](https://postimg.cc/FYKvhdwH)
+[![edit-image.jpg](https://i.postimg.cc/HLjsGFm4/edit-image.jpg)](https://postimg.cc/qtVdybzz)
