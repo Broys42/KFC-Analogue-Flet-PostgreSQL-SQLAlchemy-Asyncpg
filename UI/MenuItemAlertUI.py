@@ -24,11 +24,11 @@ class MenuItemAlertUI(ft.AlertDialog):
         ]
 
     def update_ui(self):
-        self.name_ui = ft.Text(self.menuItem.name)
+        self.name_ui = ft.Text("Изменить имя")
         self.name_textfield = ft.TextField(self.menuItem.name)
-        self.price_ui = ft.Text(self.menuItem.price)
+        self.price_ui = ft.Text("Изменить цену")
         self.price_textfield = ft.TextField(str(self.menuItem.price))
-        self.image_ui = ft.Text(self.menuItem.image)
+        self.image_ui = ft.Text("Изменить изображение")
         self.image_textfield = ft.TextField(self.menuItem.image)
 
     def change_menuItem(self, menuItem):
