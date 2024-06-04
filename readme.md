@@ -8,7 +8,7 @@
 
 ## Что можно делать
 - Создание и редактирование карточек меню
-- Создание и редактирование карточек пользователей
+- Создание и редактирование карточек пользователей (В разработке)
 - Добавление пользователям любимые блюда (o2m) (В разработке)
 
 ## Установка
@@ -29,3 +29,7 @@ DB_PASS: str
 DB_NAME: str
 CREATE_DB: bool
 ```
+
+## Скриншоты
+[![menu-page.jpg](https://i.postimg.cc/Kvgzj639/menu-page.jpg)](https://postimg.cc/yksBrrP9)
+[![edit-image.jpg](https://i.postimg.cc/VkqkBXRn/edit-image.jpg)](https://postimg.cc/FYKvhdwH)
